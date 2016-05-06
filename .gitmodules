@@ -1,0 +1,3 @@
+[submodule "weixin/3rd/PHP-MySQL-Class"]
+	path = weixin/3rd/PHP-MySQL-Class
+	url = https://github.com/a1phanumeric/PHP-MySQL-Class.git
