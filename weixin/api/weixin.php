@@ -4,10 +4,10 @@ include_once("../3rd/PHP-MySQL-Class/class.DBPDO.php");
 include_once("Loader.php");
 class CWeiXin
 {
-    function GetToken()
+    function GetToken($update=false)
     {
         $dbvalue=Loader::Mysql()->fetch('select token_value as access_token,expire,unix_timestamp(ts_update) as ts_update from weixin_token where token_name="access_token"');
-        if(empty($dbvalue) || time()> $dbvalue['expire']+$dbvalue['ts_update'])
+        if($update || empty($dbvalue) || time()> $dbvalue['expire']+$dbvalue['ts_update'])
         {
             $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.APPID.'&secret='.SECRET;
             $str_conten = file_get_contents($url);
