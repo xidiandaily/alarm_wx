@@ -4,7 +4,7 @@
   */
 
 //define your token
-define("TOKEN", "codeforfuture_chiylinfo");
+include_once("conf.php");
 $wechatObj = new wechatCallbackapiTest();
 $wechatObj->valid();
 
