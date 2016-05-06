@@ -24,5 +24,30 @@ class CWeiXin
 
         return $dbvalue['access_token'];
     }
+
+    function SendMsg($openid,$msg)
+    {
+        if(!isset($openid))
+        {
+            return;
+        }
+        $val=array();
+        $val['touser']=$openid;
+        $val['msgtype']='text';
+        $val['text']=$msg;
+
+        $post_str=json_encode($val);
+        $access_token=self::GetToken();
+
+        $url="https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$access_token";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_str);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret_str = curl_exec($ch);
+        curl_close($ch);
+        return $curl_close;
+    }
 }
 
