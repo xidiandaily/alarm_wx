@@ -6,8 +6,8 @@ class CWeiXin
 {
     function GetToken()
     {
-        $dbvalue=Loader::Mysql()->fetch('select token_value,expire,ts_update from weixin_token where token_name="access_token"');
-        if(empty($dbvalue) || time()<= $dbvalue['expire']+$dbvalue['ts_update'])
+        $dbvalue=Loader::Mysql()->fetch('select token_value as access_token,expire,unix_timestamp(ts_update) as ts_update from weixin_token where token_name="access_token"');
+        if(empty($dbvalue) || time()> $dbvalue['expire']+$dbvalue['ts_update'])
         {
             $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.APPID.'&secret='.SECRET;
             $str_conten = file_get_contents($url);
@@ -23,12 +23,6 @@ class CWeiXin
         }
 
         return $dbvalue['access_token'];
-    }
-
-    private function get_token_from_db()
-    {
-        $token;
-        return $token;
     }
 }
 
