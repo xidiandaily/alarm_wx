@@ -1,4 +1,5 @@
 <?php
+include_once("conf.php");
 include_once("../3rd/PHP-MySQL-Class/class.DBPDO.php");
 include_once("Loader.php");
 class CWeiXin
