@@ -34,7 +34,7 @@ class CWeiXin
         $val=array();
         $val['touser']=$openid;
         $val['msgtype']='text';
-        $val['text']=$msg;
+        $val['text']["content"]=$msg;
 
         $post_str=json_encode($val);
         $access_token=self::GetToken();
