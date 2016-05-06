@@ -17,7 +17,7 @@ class CWeiXin
                 var_dump($var);
                 die();
             }
-            $sql='update weixin_token set token_value='.$var["access_token"].',expire='.$var['expires_in'].' where token_name="access_token"';
+            $sql='update weixin_token set token_value="'.$var["access_token"].'",expire='.$var['expires_in'].' where token_name="access_token"';
             Loader::Mysql()->execute($sql);
             return $var['access_token'];
         }
