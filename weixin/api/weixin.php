@@ -11,8 +11,8 @@ class CWeiXin
         {
             $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.APPID.'&secret='.SECRET;
             $str_conten = file_get_contents($url);
-            $var = json_decode($str_conten);
-            if(isset($var['errcode']))
+            $var = json_decode($str_conten,true);
+            if(array_key_exists('errcode',$var))
             {
                 var_dump($var);
                 die();
