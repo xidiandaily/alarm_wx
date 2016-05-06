@@ -6,7 +6,7 @@ class CWeiXin
 {
     function GetToken()
     {
-        $dbvalue=Loader::Mysql()->fetch('select token_value,expire,ts_update where token_name="access_token"');
+        $dbvalue=Loader::Mysql()->fetch('select token_value,expire,ts_update from weixin_token where token_name="access_token"');
         if(empty($dbvalue) || time()<= $dbvalue['expire']+$dbvalue['ts_update'])
         {
             $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.APPID.'&secret='.SECRET;
@@ -17,8 +17,8 @@ class CWeiXin
                 var_dump($var);
                 die();
             }
-
-            Loader::Mysql()->execute('update weixin set token_value='.$var["access_token"].',expire='.$var['expires_in'].' where token_name="access_token"');
+            $sql='update weixin_token set token_value='.$var["access_token"].',expire='.$var['expires_in'].' where token_name="access_token"';
+            Loader::Mysql()->execute($sql);
             return $var['access_token'];
         }
 
